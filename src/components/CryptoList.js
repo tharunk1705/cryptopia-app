@@ -12,6 +12,7 @@ const CryptoList = ({ cryptoList }) => {
             price={item.current_price}
             percentage={item.market_cap_change_percentage_24h}
             key={item.id}
+            id={item.id}
           />
         );
       })}

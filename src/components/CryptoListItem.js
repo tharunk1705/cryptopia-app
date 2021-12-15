@@ -1,6 +1,16 @@
-const CryptoListItem = ({ image, symbol, name, price, percentage }) => {
+import { useNavigate } from "react-router-dom";
+
+const CryptoListItem = ({ image, symbol, name, price, percentage, id }) => {
+  const navigate = useNavigate();
+
+  const showDetails = () => {
+    navigate(`/crypto/${id}`);
+  };
   return (
-    <div className="grid gap-1 grid-cols-10 w-full bg-white border-gray-200 hover:bg-gray-100 hover:cursor-pointer border-2 shadow-md rounded-lg my-2 p-2">
+    <div
+      className="grid gap-1 grid-cols-10 w-full bg-white border-gray-200 hover:bg-gray-100 hover:cursor-pointer border-2 shadow-md rounded-lg my-2 p-2"
+      onClick={showDetails}
+    >
       <div className="col-span-1 flex justify-center items-center">
         <img src={image} alt={name} className="h-6 w-6" />
       </div>

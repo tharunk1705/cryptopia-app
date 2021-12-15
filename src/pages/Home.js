@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import CryptoList from "../components/CryptoList";
 import Search from "../components/Search";
-
+import { toast } from "react-hot-toast";
 const Home = () => {
   const [cryptoList, setCryptoList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
@@ -12,11 +12,16 @@ const Home = () => {
   }, []);
 
   const filterCrypto = (symbol) => {
-    const result = cryptoList.filter(
-      (item) => item.symbol === symbol.toLowerCase()
+    const result = cryptoList.filter((item) =>
+      item.symbol.startsWith(symbol.toLowerCase())
     );
     if (result.length > 0) {
       setFilteredList(result);
+    } else {
+      if (symbol.length >= 3) {
+        toast.error("Not Found");
+      }
+      setFilteredList(cryptoList);
     }
   };
 
