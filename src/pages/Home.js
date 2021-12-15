@@ -3,7 +3,11 @@ import { useEffect, useState } from "react";
 import CryptoList from "../components/CryptoList";
 import Search from "../components/Search";
 import { toast } from "react-hot-toast";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
+
 const Home = () => {
+  const [loading, setLoading] = useState(true);
   const [cryptoList, setCryptoList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
 
@@ -35,7 +39,9 @@ const Home = () => {
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Something went Wrong!");
       });
+    setLoading(false);
   };
   return (
     <div className=" w-full md:w-1/2 bg-gray-100 home">
@@ -43,9 +49,19 @@ const Home = () => {
       <h2 className="text-center font-bold text-2xl font-readexPro">
         Coins by MarketCap
       </h2>
-      <CryptoList
-        cryptoList={filteredList.length > 0 ? filteredList : cryptoList}
-      />
+      {loading ? (
+        <div className="w-full flex flex-col justify-center items-center mt-10">
+          {" "}
+          <Loader type="RevolvingDot" color="#6366f1" height={80} width={80} />
+          <span className="text-center font-bold font-readexPro text-2xl text-indigo-500 ">
+            Loading...
+          </span>
+        </div>
+      ) : (
+        <CryptoList
+          cryptoList={filteredList.length > 0 ? filteredList : cryptoList}
+        />
+      )}
     </div>
   );
 };

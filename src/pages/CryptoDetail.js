@@ -1,6 +1,9 @@
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
+import toast from "react-hot-toast";
 const CryptoDetail = () => {
   const { id } = useParams();
   const hasFetchedData = useRef(false);
@@ -12,12 +15,12 @@ const CryptoDetail = () => {
       axios
         .get(`https://api.coingecko.com/api/v3/coins/${id}`)
         .then((res) => {
-          console.log(res.data);
           setDetail(res.data);
           setLoading(false);
         })
         .catch((error) => {
           console.log(error);
+          toast.error("Something went Wrong!");
         });
       hasFetchedData.current = true;
     }
@@ -28,7 +31,7 @@ const CryptoDetail = () => {
     let athDate =
       resultDate.getDate() +
       "." +
-      resultDate.getMonth() +
+      (resultDate.getMonth() + 1) +
       "." +
       resultDate.getFullYear();
     return athDate;
@@ -37,7 +40,13 @@ const CryptoDetail = () => {
   return (
     <div className="p-6  w-full md:w-1/2 flex flex-col justify-center items-center bg-gray-100 home">
       {loading ? (
-        <p>Loading....</p>
+        <div className="w-full flex flex-col justify-center items-center mt-10">
+          {" "}
+          <Loader type="RevolvingDot" color="#6366f1" height={80} width={80} />
+          <span className="text-center font-bold font-readexPro text-2xl text-indigo-500 ">
+            Loading...
+          </span>
+        </div>
       ) : (
         <>
           <div className="flex justify-between items-center w-full">
@@ -68,6 +77,9 @@ const CryptoDetail = () => {
             <span className="font-bold font-readexPro text-3xl">
               &#8377; {detail.market_data.current_price.inr}
             </span>
+            <p>
+              last updated <span>{parseDate(detail.last_updated)}</span>
+            </p>
           </div>
           <div className="bg-gray-200 p-2 flex flex-col justify-center items-center rounded-lg m-4  w-full">
             <p className=" text-xl">All Time High</p>
@@ -89,8 +101,8 @@ const CryptoDetail = () => {
                     : "bg-red-500"
                 }`}
               >
-                <div className="">1H</div>
-                <div>
+                <div className="text-sm">1 Hour</div>
+                <div className="text-xl fonr-bold font-readexPro">
                   {detail.market_data.price_change_percentage_1h_in_currency.inr.toFixed(
                     2
                   )}{" "}
@@ -105,8 +117,8 @@ const CryptoDetail = () => {
                     : "bg-red-500"
                 }`}
               >
-                <div className="">1D</div>
-                <div>
+                <div className="text-sm">1 Day</div>
+                <div className="text-xl fonr-bold font-readexPro">
                   {detail.market_data.price_change_percentage_24h_in_currency.inr.toFixed(
                     2
                   )}{" "}
@@ -121,8 +133,8 @@ const CryptoDetail = () => {
                     : "bg-red-500"
                 }`}
               >
-                <div className="">1M</div>
-                <div>
+                <div className="text-sm">1 Month</div>
+                <div className="text-xl fonr-bold font-readexPro">
                   {detail.market_data.price_change_percentage_30d_in_currency.inr.toFixed(
                     2
                   )}{" "}
@@ -137,8 +149,8 @@ const CryptoDetail = () => {
                     : "bg-red-500"
                 }`}
               >
-                <div className="">1Y</div>
-                <div>
+                <div className="text-sm">1 Year</div>
+                <div className="text-xl fonr-bold font-readexPro">
                   {detail.market_data.price_change_percentage_1y_in_currency.inr.toFixed(
                     2
                   )}{" "}
