@@ -40,6 +40,9 @@ const Home = () => {
   return (
     <div className=" w-full md:w-1/2 bg-gray-100 home">
       <Search filterCrypto={filterCrypto} />
+      <h2 className="text-center font-bold text-2xl font-readexPro">
+        Coins by MarketCap
+      </h2>
       <CryptoList
         cryptoList={filteredList.length > 0 ? filteredList : cryptoList}
       />
