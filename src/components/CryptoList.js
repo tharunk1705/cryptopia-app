@@ -10,7 +10,7 @@ const CryptoList = ({ cryptoList }) => {
             symbol={item.symbol}
             name={item.name}
             price={item.current_price}
-            percentage={item.market_cap_change_percentage_24h}
+            percentage={item.price_change_percentage_24h}
             key={item.id}
             id={item.id}
           />

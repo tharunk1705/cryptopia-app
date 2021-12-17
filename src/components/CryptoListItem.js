@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 
 const CryptoListItem = ({ image, symbol, name, price, percentage, id }) => {
   const navigate = useNavigate();
-
   const showDetails = () => {
     navigate(`/crypto/${id}`);
   };
@@ -29,7 +28,7 @@ const CryptoListItem = ({ image, symbol, name, price, percentage, id }) => {
             percentage > 0 ? "bg-green-500" : "bg-red-500"
           }  rounded-lg px-2 py-1`}
         >
-          {percentage.toFixed(2)}%
+          {Number(percentage).toFixed(2)}%
         </span>
       </div>
     </div>

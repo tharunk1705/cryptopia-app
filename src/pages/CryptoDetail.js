@@ -42,7 +42,7 @@ const CryptoDetail = () => {
       {loading ? (
         <div className="w-full flex flex-col justify-center items-center mt-10">
           {" "}
-          <Loader type="RevolvingDot" color="#6366f1" height={80} width={80} />
+          <Loader type="MutatingDots" color="#6366f1" height={80} width={80} />
           <span className="text-center font-bold font-readexPro text-2xl text-indigo-500 ">
             Loading...
           </span>
