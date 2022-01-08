@@ -151,10 +151,11 @@ const CryptoDetail = () => {
               >
                 <div className="text-sm">1 Year</div>
                 <div className="text-xl fonr-bold font-readexPro">
-                  {detail.market_data.price_change_percentage_1y_in_currency.inr.toFixed(
-                    2
-                  )}{" "}
-                  %
+                  {detail.market_data.price_change_percentage_1y_in_currency.inr
+                    ? `${detail.market_data.price_change_percentage_1y_in_currency.inr.toFixed(
+                        2
+                      )}%`
+                    : `--`}{" "}
                 </div>
               </div>
             </div>
